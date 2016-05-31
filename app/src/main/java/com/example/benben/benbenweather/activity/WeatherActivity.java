@@ -71,8 +71,8 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
         temp1Text = (TextView) findViewById(R.id.temp1);
         temp2Text = (TextView) findViewById(R.id.temp2);
         currentDateText = (TextView) findViewById(R.id.current_date);
-//        switchCity = (Button) findViewById(R.id.switch_city);
-//        refreshWeather = (Button) findViewById(R.id.refresh_weather);
+        switchCity = (Button) findViewById(R.id.switch_city);
+        refreshWeather = (Button) findViewById(R.id.refresh_weather);
 
         String countyCode = getIntent().getStringExtra("county_code");
         if (!TextUtils.isEmpty(countyCode)) {
@@ -91,24 +91,24 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.switch_city:
-//                Intent intent = new Intent(this, ChooseAreaActivity.class);
-//                intent.putExtra("from_weather_activity", true);
-//                startActivity(intent);
-//                finish();
-//                break;
-//            case R.id.refresh_weather:
-//                publishText.setText("同步中...");
-//                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-//                String weathercode = prefs.getString("weather_code", "");
-//                if (!TextUtils.isEmpty(weathercode)) {
-//                    queryWeatherInfo(weathercode);
-//                }
-//                break;
-//            default:
-//                break;
-//        }
+        switch (v.getId()) {
+            case R.id.switch_city:
+                Intent intent = new Intent(this, ChooseAreaActivity.class);
+                intent.putExtra("from_weather_activity", true);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.refresh_weather:
+                publishText.setText("同步中...");
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                String weathercode = prefs.getString("weather_code", "");
+                if (!TextUtils.isEmpty(weathercode)) {
+                    queryWeatherInfo(weathercode);
+                }
+                break;
+            default:
+                break;
+        }
 
     }
 
