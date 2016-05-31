@@ -2,7 +2,11 @@ package com.example.benben.benbenweather.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -70,6 +74,13 @@ public class ChooseAreaActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (prefs.getBoolean("city_selected", false)) {
+            Intent intent = new Intent(this, WeatherActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.choose_area);
         listView = (ListView) findViewById(R.id.list_view);
@@ -84,8 +95,15 @@ public class ChooseAreaActivity extends Activity {
                     selectedProvince = provinceList.get(position);
                     queryCities();
                 } else if (currentLevel == LEVEL_CITY) {
-                    selectedCity =  cityList.get(position);
+                    selectedCity = cityList.get(position);
                     queryCounties();
+                } else if (currentLevel == LEVEL_COUNTY) {
+                    String countyCode = countyList.get(position).getCountyCode();
+                    Intent intent = new Intent(ChooseAreaActivity.this,
+                            WeatherActivity.class);
+                    intent.putExtra("county_code", countyCode);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -100,7 +118,7 @@ public class ChooseAreaActivity extends Activity {
         if (provinceList.size() > 0) {
             dataList.clear();
             for (ProvinceModel province : provinceList) {
-                Log.i("lyx", "123"+province.getProvinceName());
+                Log.i("lyx", "123" + province.getProvinceName());
                 dataList.add(province.getProvinceName());
             }
             adapter.notifyDataSetChanged();
@@ -121,7 +139,7 @@ public class ChooseAreaActivity extends Activity {
             dataList.clear();
             for (CityModel city : cityList) {
                 Log.i("lyx", "_____________________5________________________");
-                Log.i("lyx", "234"+city.getCityName());
+                Log.i("lyx", "234" + city.getCityName());
                 dataList.add(city.getCityName());
 
             }
@@ -143,7 +161,7 @@ public class ChooseAreaActivity extends Activity {
         if (countyList.size() > 0) {
             dataList.clear();
             for (CountyModel county : countyList) {
-                Log.i("lyx", "345"+county.getCountyName());
+                Log.i("lyx", "345" + county.getCountyName());
                 dataList.add(county.getCountyName());
             }
             adapter.notifyDataSetChanged();
@@ -244,4 +262,6 @@ public class ChooseAreaActivity extends Activity {
             finish();
         }
     }
+
+
 }
