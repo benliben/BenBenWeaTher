@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.benben.benbenweather.R;
+import com.example.benben.benbenweather.service.AutoUpdateServiece;
 import com.example.benben.benbenweather.util.HttpCallbackListener;
 import com.example.benben.benbenweather.util.HttpUtil;
 import com.example.benben.benbenweather.util.Utility;
@@ -184,7 +185,10 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
         currentDateText.setText(prefs.getString("current_date", ""));
         weatherInfoLayout.setVisibility(View.VISIBLE);
         cityNameText.setVisibility(View.VISIBLE);
+        startService(new Intent(this, AutoUpdateServiece.class));
     }
+
+
 
 
 }

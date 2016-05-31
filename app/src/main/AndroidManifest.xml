@@ -19,6 +19,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.WeatherActivity"></activity>
+
+
+        <!--注册服务和广播接收-->
+        <service android:name=".service.AutoUpdateServiece"></service>
+        <receiver android:name=".receiver.AutoUpdateReceiver"></receiver>
     </application>
+
+
+
 
 </manifest>
