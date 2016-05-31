@@ -4,7 +4,7 @@ package com.example.benben.benbenweather.model;
  * Created by benebn on 2016/5/31.
  * 天气预报 县级 model
  */
-public class CountyModel {
+public class CountyModel extends CityModel {
     private int id;
     private String countyName;
     private String countyCode;
